@@ -10,5 +10,5 @@ RUN mv *.pem   etc/ssl/
 RUN mv nginx.conf   etc/nginx/conf.d/
 
 EXPOSE 443
-
-ENTRYPOINT service nginx start && bash
+# CMD bash
+CMD nginx -g 'daemon off;' 
