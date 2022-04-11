@@ -11,6 +11,5 @@ RUN mv *.pem   etc/ssl/
 RUN mv default   etc/nginx/sites-available/
 
 EXPOSE 443
-# RUN service nginx start
-# CMD bash
+
 CMD ["nginx", "-g", "daemon off;"]
