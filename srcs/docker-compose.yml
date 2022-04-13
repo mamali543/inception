@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+    mariadb:
+        build: ./mariadb 
+        image: db
+        container_name : db
+        restart: unless-stopped
+        ports:
+            - "3306:3306"
+        env_file:
+            - .env
+        networks:
+            - wordpress
+    nginx:
+        build: ./requierements/nginx
+        depends_on:
+            - wordpress
+        image: ng
+        container_name : ng
+        restart: unless-stopped
+        ports:
+            - "443:443"
+        networks:
+            - wordpress
+    wordpress:
+        build: ./requierements/wordpress
+        image: wp
+        depends_on:
+            - mariadb
+        container_name : wp
+        restart: unless-stopped
+        ports:
+            - "9000:9000"
+        env_file:
+            - .env
+        networks:
+            - wordpress
+networks:
+  wordpress:
+    driver: bridge
