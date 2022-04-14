@@ -2,9 +2,9 @@ version: '3'
 
 services:
     mariadb:
-        build: ./mariadb 
-        image: db
-        container_name : db
+        build: ./requirements/mariadb 
+        image: mariadb_image
+        container_name : mariadb
         restart: unless-stopped
         ports:
             - "3306:3306"
@@ -12,30 +12,41 @@ services:
             - .env
         networks:
             - wordpress
+
+
     nginx:
-        build: ./requierements/nginx
-        depends_on:
-            - wordpress
-        image: ng
-        container_name : ng
+        build: ./requirements/nginx
+        image: nginx_image
+        container_name : nginx
         restart: unless-stopped
         ports:
             - "443:443"
+        volumes:
+            - 'wordpress:/var/www/html/'
         networks:
             - wordpress
+
     wordpress:
-        build: ./requierements/wordpress
-        image: wp
-        depends_on:
-            - mariadb
-        container_name : wp
+        build: ./requirements/wordpress
+        image: wordpress_image
+        container_name : wordpress
         restart: unless-stopped
         ports:
             - "9000:9000"
         env_file:
             - .env
+        volumes:
+            - 'wordpress:/var/www/html/'
         networks:
             - wordpress
+
 networks:
   wordpress:
-    driver: bridge
+
+volumes:
+    wordpress:
+        driver: "local"
+        driver_opts:
+            o: bind
+            type: ext4
+            device: /home/reda/data/wp
