@@ -6,7 +6,7 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
 cd /tmp \
     && curl -LO https://wordpress.org/latest.tar.gz && tar xzvf latest.tar.gz \
     && cp -r /tmp/wordpress/* /var/www/html/ \
+    && cp /wp-config.php /var/www/html/ \
     && chown -R www-data:www-data /var/www/html/;
-    cp /wp-config.php /var/www/html/;
 fi
 php-fpm7.3 -F -R

@@ -12,6 +12,8 @@ services:
             - .env
         networks:
             - wordpress
+        volumes:
+            - database:/var/lib/mysql
 
 
     nginx:
@@ -50,3 +52,9 @@ volumes:
             o: bind
             type: ext4
             device: /home/reda/data/wp
+    database: 
+            driver: local
+            driver_opts:
+                    type: none
+                    device: /home/reda/data/db
+                    o: bind

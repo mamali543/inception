@@ -26,8 +26,8 @@ server {
 	#
 	listen 443 ssl default_server;
 	listen [::]:443 ssl default_server;
-    ssl_certificate /etc/ssl/certificate.pem;
-    ssl_certificate_key /etc/ssl/key.pem;
+    ssl_certificate /etc/ssl/certs/certificate.pem;
+    ssl_certificate_key /etc/ssl/private/key.pem;
     ssl_protocols TLSv1.2;
 	#
 	# Note: You should disable gzip for SSL traffic.
@@ -62,9 +62,7 @@ server {
 	#	# With php-fpm (or other unix sockets):
 	#	fastcgi_pass unix:/run/php/php7.3-fpm.sock;
 	#	# With php-cgi (or other tcp sockets):
-		fastcgi_pass 127.0.0.1:9000;
-		fastcgi_param REQUEST_METHOD $request_method;
-    	fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		fastcgi_pass wordpress:9000;
 	}
 
 	# deny access to .htaccess files, if Apache's document root
