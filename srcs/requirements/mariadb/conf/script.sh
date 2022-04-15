@@ -4,7 +4,7 @@ if [ ! -d "/var/lib/mysql/wordpress" ]; then
     mysql -u root -e  "CREATE DATABASE IF NOT EXISTS wordpress; flush privileges;"
     mysql -u root -e "use wordpress; grant all privileges on *.* to '${USER}'@'localhost' IDENTIFIED BY '${USER_P}'; flush privileges;"      
     mysql -u root -e "use wordpress; grant all privileges on *.* to '${USER}'@'%.%.%.%' IDENTIFIED BY '${USER_P}'; flush privileges;"
-
+    mysql -u root wordpress < wordpress.sql
     mysql -u root -e  "CREATE USER '${SECOND_USER}'@'%.%.%.%' IDENTIFIED BY '${SECOND_PASSWORD}'; flush privileges;"
     mysql -u root -e "use wordpress; grant all privileges on wordpress.* to '${SECOND_USER}'@'%.%.%.%' IDENTIFIED BY '${SECOND_PASSWORD}'; flush privileges;"
     # mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${USER_P}'; flush privileges;"
