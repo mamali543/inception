@@ -1,8 +1,8 @@
 all: add_dirs add_host build up
 
 add_dirs:
-	mkdir -p /home/reda/data/db
-	mkdir -p /home/reda/data/wp
+	mkdir -p /home/mamali/data/db
+	mkdir -p /home/mamali/data/wp
 add_host:
 	echo "127.0.0.1       mamali.42.fr" >> /etc/hosts
 
